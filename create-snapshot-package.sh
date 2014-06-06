@@ -82,8 +82,16 @@ create_nightly_build() {
 
 package_mariadb_with_mroonga() {
   cd ~/work/mroonga.build/packages/source
-  #make archive GROONGA_VERSION=4.0.2.2014.06.04 GROONGA_DOWNLOAD_BASE=http://packages.groonga.org/nightly > /dev/null
-  make archive > /dev/null
+  groonga_tar_gz=$(echo ~/public/nightly/groonga-[0-9]*.${today}.tar.gz)
+  groonga_normalizer_mysql_tar_gz=$(echo ~/public/nightly/groonga-normalizer-mysql-[0-9]*.${today}.tar.gz)
+  cp ${groonga_tar_gz} tmp/
+  cp ${groonga_normalizer_mysql_tar_gz} tmp/
+  groonga_version=${groonga_tar_gz:t:r:r:s/groonga-//}
+  groonga_normalizer_mysql_version=${groonga_normalizer_mysql_tar_gz:t:r:r:s/groonga-normalizer-mysql-//}
+  make archive \
+      GROONGA_VERSION=${groonga_version} \
+      GROONGA_NORMALIZER_MYSQL_VERSION=${groonga_normalizer_mysql_version} \
+      > /dev/null
   for archive in files/mariadb-*.zip; do
     rm -rf tmp
     mkdir -p tmp
