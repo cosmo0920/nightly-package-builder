@@ -84,6 +84,7 @@ package_mariadb_with_mroonga() {
   cd ~/work/mroonga.build/packages/source
   groonga_tar_gz=$(echo ~/public/nightly/groonga-[0-9]*.${today}.tar.gz)
   groonga_normalizer_mysql_tar_gz=$(echo ~/public/nightly/groonga-normalizer-mysql-[0-9]*.${today}.tar.gz)
+  mkdir -p tmp/
   cp ${groonga_tar_gz} tmp/
   cp ${groonga_normalizer_mysql_tar_gz} tmp/
   groonga_version=${groonga_tar_gz:t:r:r:s/groonga-//}
