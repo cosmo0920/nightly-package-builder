@@ -44,7 +44,7 @@ create_nightly_build() {
   need_install=$1; shift
   cd ~/work
   if [ ! -d ${project_name} ]; then
-    git clone --quiet https://github.com/${github_org}/${project_name}.git
+    git clone --quiet --recursive https://github.com/${github_org}/${project_name}.git
     cd ${project_name}
     ./autogen.sh > /dev/null
     cd -
@@ -52,6 +52,7 @@ create_nightly_build() {
     cd ${project_name}
     git checkout --quiet .
     git pull --quiet --rebase
+    git submodule update --init
     ./autogen.sh > /dev/null
     cd -
   fi
