@@ -4,7 +4,7 @@ set -u
 set -e
 
 keep_n_days=7
-mysql_version=5.6.17
+mysql_version=5.6.19
 
 today=$(date +%Y.%m.%d)
 mysql_base="mysql-${mysql_version}"
